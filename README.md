@@ -15,6 +15,8 @@ The main.rs applicaiton implements the trait which handles the role assumption. 
 
 In the IAM policy and role trust policy you can also add restrictions to limit to a speciifc organization, IP address, EC2 isntance ID, account, region, etc.
 
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+
 ## Why assume a role with MFA in an application?
 
 Why would you want to do this? Well, you probably don't want to enter your creds over and over again so you probably don't want to do exactly what this code is doing. What you can do though is pull the credentials from AWS secrets manager so the hard coded credentials are never on your EC2 instance.

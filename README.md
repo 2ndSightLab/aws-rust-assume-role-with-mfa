@@ -65,6 +65,12 @@ Once you have the permissions working correctly, delete the credentials and AWS 
 
 Some things to consider if you want to run a sensitive action and then completely terminate the associated session when the session is complete.
 
+* I am new to Rust. I just learned it a month ago using Amazon Q CLI (though I have 30 years of programming experience).
+* I have not fully reviewed this code.
+* I couldn't easily find which were the most up to date crates for the AWS Rust SDK for STS. I hope these are correct but not sure honestly.
+* I used a combination of Amazon Q CLI, console, and Google Gemini to get this working. Gemini couldn't get it right. Mostly used Q. If anything is wrong I blame Q :-)
+* But I probably won't be done by now if I hadn't used Amazon Q...the errors were tricky as the libraries seemed to have changed a lot over time.
+
 ## Why not use IAM Identity Center?
 
 I don't want to use a browser. The OAuth device code flow is too often the source of phishing attacks. An attacker can also start a session and potentially trick me to completing the login in my browser. Hopefully this method is harder to phish, the nothing is foolproof.

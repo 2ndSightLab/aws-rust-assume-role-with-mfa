@@ -1,3 +1,6 @@
+// Author: Teri Radichel
+// Organization: 2ndSightLab.com
+
 use std::io::{self, Write};
 use aws_config::{BehaviorVersion, defaults};
 use aws_credential_types::Credentials;

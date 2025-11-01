@@ -11,6 +11,10 @@ What this code does is asks you to input the values neccessary to assume a role 
 
 The main.rs applicaiton implements the trait which handles the role assumption. Then main.rs lists the s3 buckets in the account and region of the assumed role.
 
+## Requiring MFA in policies nad other restrictions
+
+In the IAM policy and role trust policy you can also add restrictions to limit to a speciifc organization, IP address, EC2 isntance ID, account, region, etc.
+
 ## Why assume a role with MFA in an application?
 
 Why would you want to do this? Well, you probably don't want to enter your creds over and over again so you probably don't want to do exactly what this code is doing. What you can do though is pull the credentials from AWS secrets manager so the hard coded credentials are never on your EC2 instance.
@@ -35,8 +39,6 @@ Do your vendors offer you the ability to do that to prevent supply chain and con
 
 Need a pentest?
 https://2ndSightLab.com
-
-In the IAM policy and role trust policy you can also add restrictions to limit to a speciifc organization, IP address, EC2 isntance ID, account, region, etc.
 
 ## NOT PRODUCTION CODE
 This is NOT production code. This simply shows the neccessary libraries and such and is a working simple to get you started. I asked the AI engines to do things securely but then through the rounds of revsions I'm not sure if this code is properly using the secrecy crate. That would ensure the values are only available in memory for a short time when being used. You likely don't want to have someone entring all these values all the time. This was just a test to prove that I could assume a role with MFA and other restrictions using rust.

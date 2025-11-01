@@ -1,3 +1,6 @@
+// Author: Teri Radichel
+// Organization: 2ndSightLab.com
+
 use rust_diggity_aws_auth::assume_role_with_mfa;
 use rust_diggity_aws_auth::ConsolePrompt;
 use aws_sdk_s3 as s3;

@@ -1,6 +1,6 @@
 # aws-rust-assume-role-with-mfa
 
-If it helps anyone...this repository contains a test to assume a role with MFA using the AWS rust sdk.
+This repository contains a test to assume a role with MFA using the AWS rust sdk.
 
 ## Trait that can be used in any application
 I created a trait that can be reused in any application as demonstrated by the main.rs module. You can create a trait with a library that can be pulled into any appliation to handle your authentiation properly.

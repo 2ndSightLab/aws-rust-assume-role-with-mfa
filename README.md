@@ -3,7 +3,7 @@
 This repository contains a test to assume a role with MFA using the AWS rust sdk.
 
 ## Trait that can be used in any application
-I created a trait that can be reused in any application as demonstrated by the main.rs module. You can create a trait with a library that can be pulled into any appliation to handle your authentiation properly.
+I created a trait that can be reused in any application as demonstrated by the main.rs module. You can create a trait with a library that can be pulled into any application to handle your authentiation properly.
 
 ## What it does
 
@@ -27,7 +27,7 @@ You add a role profile to your EC2 instance that has permission to access the sp
 
 But why not just use the EC2 role then? 
 
-Because you can't enforce MFA. So the purpose of this code is to assume a role with MFA to perform some critical actions - without ever storing the credentials to do it on the EC2 instance - OR a developer's machine. But to run the code a developer has to provide their MFA device.
+Because you can't enforce MFA. So the purpose of this code is to assume a role with MFA to perform some critical actions - without ever storing the credentials to do it on the EC2 instance - OR on a developer's machine. But to run the appliation, a developer has to provide their MFA device each time the application runs.
 
 ## An example
 
@@ -56,3 +56,15 @@ Role Profile:
 https://github.com/2ndSightLab/aws-scripts/tree/main/scripts/aws-cli-role-profile
 
 Once you have the permissions working correctly, delete the credentials and AWS CLI profile information and test the rust application and you'll see that you can assume a role with MFA in rust the same way.
+
+## Other considerations
+
+* AWS sessions must be at least 15 minutes long last time I checked. So you're sessions will be hanging around at least that long.
+* AWS does not offer a way to terminate IAM sessions (not really).
+* You can set a policy to disallow sessions over a certain age from performing actions, but what if you have some older sessions that need to keep running while others are terminated?
+
+Some things to consider if you want to run a sensitive action and then completely terminate the associated session when the session is complete.
+
+## Why not use IAM Identity Center?
+
+I don't want to use a browser. The OAuth device code flow is too often the source of phishing attacks. An attacker can also start a session and potentially trick me to completing the login in my browser. Hopefully this method is harder to phish, the nothing is foolproof.

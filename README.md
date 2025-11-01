@@ -73,4 +73,4 @@ Some things to consider if you want to run a sensitive action and then completel
 
 ## Why not use IAM Identity Center?
 
-I don't want to use a browser. The OAuth device code flow is too often the source of phishing attacks. An attacker can also start a session and potentially trick me to completing the login in my browser. Hopefully this method is harder to phish, the nothing is foolproof.
+I don't want to use a browser. The OAuth device code flow is too often the source of phishing attacks. An attacker can also start a session and potentially trick me to completing the login in my browser. Hopefully this method is harder to phish, though nothing is foolproof.

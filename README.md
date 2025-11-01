@@ -1,14 +1,20 @@
 # aws-rust-assume-role-with-mfa
 
-If it helps anyone...this is a test to assume a role with MFA using the AWS rust sdk.
+If it helps anyone...this repository contains a test to assume a role with MFA using the AWS rust sdk.
 
-I created a trait that can be reused in any application as demonstrated by the main.rs module.
+## Trait that can be used in any application
+I created a trait that can be reused in any application as demonstrated by the main.rs module. You can create a trait with a library that can be pulled into any appliation to handle your authentiation properly.
 
-This is NOT production code. This simply shows the neccessary libraries and such and is a working simple to get you started.
+## What it does
 
-What this code does is asks you to input the values neccessary to assume a role with MFA and the rust code assumes the role.
+What this code does is asks you to input the values neccessary to assume a role with MFA and the rust code assumes the role. It is a simple test to make sure I have crates and code that works.
 
-The main.rs applicaiton lists the s3 buckets in the account and region of the assumed role.
+The main.rs applicaiton implements the trait which handles the role assumption. Then main.rs lists the s3 buckets in the account and region of the assumed role.
+
+## NOT PRODUCTION CODE
+This is NOT production code. This simply shows the neccessary libraries and such and is a working simple to get you started. I asked the AI engines to do things securely but then through the rounds of revsions I'm not sure if this code is properly using the secrecy crate. That would ensure the values are only available in memory for a short time when being used. You likely don't want to have someone entring all these values all the time. This was just a test to prove that I could assume a role with MFA and other restrictions using rust.
+
+## Why assume a role with MFA in an application?
 
 Why would you want to do this? Well, you probably don't want to enter your creds over and over again so you probably don't want to do exactly what this code is doing. What you can do though is pull the credentials from AWS secrets manager so the hard coded credentials are never on your EC2 instance.
 
@@ -19,6 +25,19 @@ You add a role profile to your EC2 instance that has permission to access the sp
 But why not just use the EC2 role then? 
 
 Because you can't enforce MFA. So the purpose of this code is to assume a role with MFA to perform some critical actions - without ever storing the credentials to do it on the EC2 instance - OR a developer's machine. But to run the code a developer has to provide their MFA device.
+
+## An example
+
+I perform penetration tests on customer accounts. I don't want the role a customer gives me to be abused by an attacker. I do my best to ensure only I can assume the role when running penetration test tools. I ask them to create a role which requires MFA and an external ID which is unique for each test. I also provide them IP addresses that I will be using for the test, which are different for each test, and the account number and user taht needs to assume the role.
+
+When I run my tools, I have to be coming from the correct IP address with the correct uesr in the correct account and provide a one time use MFA token to start the session. If an attacker were to get access to a particular session, they would need to enter MFA a again to start a new session or refresh the existing session. 
+
+That makes it more difficult to use the credentials the customer has given me to abuse their resources.
+
+Do your vendors offer you the ability to do that to prevent supply chain and confused deputy attacks? They should.
+
+Need a pentest?
+https://2ndSightLab.com
 
 In the IAM policy and role trust policy you can also add restrictions to limit to a speciifc organization, IP address, EC2 isntance ID, account, region, etc.
 

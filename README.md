@@ -11,7 +11,7 @@ What this code does is asks you to input the values neccessary to assume a role 
 
 The main.rs applicaiton implements the trait which handles the role assumption. Then main.rs lists the s3 buckets in the account and region of the assumed role.
 
-## Requiring MFA in policies nad other restrictions
+## Requiring MFA in policies and other restrictions
 
 In the IAM policy and role trust policy you can also add restrictions to limit to a speciifc organization, IP address, EC2 isntance ID, account, region, etc.
 
